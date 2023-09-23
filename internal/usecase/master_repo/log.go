@@ -23,10 +23,11 @@ func (r *MasterRepository) WriteLog(
 	lambdaRequests []entity.LambdaRequest,
 ) error {
 	madeLogs := makeCreateLog(lambdaRequests)
-	if err := r.DBHandler.Conn.Create(&madeLogs).Error; err != nil {
-		return fmt.Errorf(
-			"db connection error or unknown db error: %s", err)
-	}
+	fmt.Println("Log LogID scheduled to be stored :", madeLogs[0].LogID)
+	fmt.Println("Log RequestID scheduled to be stored :", madeLogs[0].RequestID)
+	fmt.Println("Log SQSMessageID scheduled to be stored :", madeLogs[0].SQSMessageID)
+	fmt.Println("Log ErrCode scheduled to be stored :", &madeLogs[0].ErrCode)
+	fmt.Println("Log ErrMessage scheduled to be stored :", &madeLogs[0].ErrMessage)
 	return nil
 }
 
